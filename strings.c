@@ -10,8 +10,6 @@ int print_string(char *s)
 {
 	unsigned int c = 0;
 
-	if (s == NULL)
-		return (-1);
 	while (*s)
 	{
 		c += _putchar(*s);
