@@ -8,7 +8,7 @@
 
 int _printf(const char *format, ...)
 {
-	unsigned int i = 0, count = 0, ps;
+	unsigned int i = 0, count = 0;
 	va_list args;
 
 	if (format == NULL)
@@ -32,10 +32,7 @@ int _printf(const char *format, ...)
 				count += _putchar(va_arg(args, int));
 				break;
 			case 's':
-				ps = print_string(va_arg(args, char *));
-				if (ps < 0)
-					return (-1);
-				count += ps;
+				count += print_string(va_arg(args, char *));
 				break;
 			}
 		}
