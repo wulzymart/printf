@@ -32,7 +32,7 @@ int _printf(const char *format, ...)
 				count += _putchar(va_arg(args, int));
 				break;
 			case 's':
-				ps += print_string(va_arg(args, char *));
+				ps = print_string(va_arg(args, char *));
 				if (ps < 0)
 					return (-1);
 				count += ps;
