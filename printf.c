@@ -28,10 +28,13 @@ int _printf(const char *format, ...)
 			f = spec_func(format[i]);
 			if (f == NULL)
 				_putchar('%');
+			else
+			{
 			value = f(args);
 			if (value < 0)
 				continue;
 			count += value;
+			}
 		}
 	}
 	va_end(args);
