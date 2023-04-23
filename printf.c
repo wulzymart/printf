@@ -23,14 +23,14 @@ int _printf(const char *format, ...)
 		else
 		{
 			i++;
-			if (format[i] == 0)
+			if (format[i] == '\0')
 				return (-1);
 			f = spec_func(format[i]);
 			if (f == NULL)
-				return (-1);
+				_putchar('%');
 			value = f(args);
 			if (value < 0)
-				return (-1);
+				continue;
 			count += value;
 		}
 	}
