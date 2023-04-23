@@ -27,7 +27,10 @@ int _printf(const char *format, ...)
 				return (-1);
 			f = spec_func(format[i]);
 			if (f == NULL)
-				_putchar('%');
+			{
+				count += _putchar('%');
+				count += _putchar(format[i]);
+			}
 			else
 			{
 			value = f(args);
