@@ -1,12 +1,12 @@
 #include "main.h"
 
 /**
- * print_string - prints any given string
+ * prints - prints any given string
  * @s: string to be printed
  * Return: number of charcters printed
  */
 
-int print_string(char *s)
+int prints(char *s)
 {
 	unsigned int c = 0;
 
@@ -17,4 +17,18 @@ int print_string(char *s)
 		s++;
 	}
 	return (c);
+}
+/**
+ * print_string - print a string from args list
+ * @args: valist arguement to print from
+ * Return: number of characters printed
+ */
+
+int print_string(va_list args)
+{
+	char *s = va_arg(args, char *);
+
+	if (s)
+		return (prints(s));
+	return (-1);
 }

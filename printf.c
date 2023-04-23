@@ -9,7 +9,9 @@
 int _printf(const char *format, ...)
 {
 	unsigned int i = 0, count = 0;
+	int value;
 	va_list args;
+	int (*f)(va_list);
 
 	if (format == NULL)
 		return (-1);
@@ -23,18 +25,13 @@ int _printf(const char *format, ...)
 			i++;
 			if (format[i] == 0)
 				return (-1);
-			switch (format[i])
-			{
-			case '%':
-				count += _putchar('%');
-				break;
-			case 'c':
-				count += _putchar(va_arg(args, int));
-				break;
-			case 's':
-				count += print_string(va_arg(args, char *));
-				break;
-			}
+			f = spec_func(format[i]);
+			if (f == NULL)
+				return (-1);
+			value = f(args);
+			if (value < 0)
+				return (-1);
+			count += value;
 		}
 	}
 	va_end(args);
