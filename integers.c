@@ -43,3 +43,14 @@ int print_int(va_list args)
 	count += print_num(n);
 	return (count);
 }
+/**
+ * print_unsigned - prints a signed int
+ * @args: va_list arguement pointer
+ * Return: number of printed digits
+ */
+int print_unsigned(va_list args)
+{
+	unsigned int n = va_arg(args, unsigned int);
+
+	return (print_num(n));
+}
