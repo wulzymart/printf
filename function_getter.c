@@ -7,7 +7,7 @@
 int (*spec_func(char fmt))(va_list)
 {
 	int i;
-	func_man spec_func[11] = {
+	func_man spec_func[12] = {
 		{'c', print_char},
 		{'s', print_string},
 		{'%', print_pcent},
@@ -18,9 +18,10 @@ int (*spec_func(char fmt))(va_list)
 		{'u', print_unsigned},
 		{'x', print_hex},
 		{'X', print_HEX},
-		{'S', print_S}
+		{'S', print_S},
+		{'p', print_ptr}
 	};
-	for (i = 0; i < 11; i++)
+	for (i = 0; i < 12; i++)
 		if (fmt == spec_func[i].fmt)
 			return (spec_func[i].f);
 	return (NULL);
