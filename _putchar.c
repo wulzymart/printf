@@ -8,18 +8,8 @@
 
 int _putchar(char c)
 {
-	static int i;
-	static char buff[1024];
+	char buff[1024];
 
-	if (i >= 1024 || c  == -1)
-	{
-		write(1, buff, i);
-		i = 0;
-	}
-	if (c != -1)
-	{
-		buff[i] = c;
-		i++;
-	}
-	return (1);
+	buff[0] = c;
+	return (write(1, buff, 1));
 }
