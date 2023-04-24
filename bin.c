@@ -1,6 +1,6 @@
 #include "main.h"
 
-/*
+/**
  * print_bin - function that prints a binary value
  * @args: an argument list
  * Return: returns the amount of elements printed
