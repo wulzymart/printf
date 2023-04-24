@@ -16,7 +16,7 @@ int _putchar(char c)
 		write(1, buff, i);
 		i = 0;
 	}
-	if (i != -1)
+	if (c != -1)
 	{
 		buff[i] = c;
 		i++;
