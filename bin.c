@@ -35,7 +35,7 @@ int printb(unsigned int n)
 
 int print_bin(va_list args)
 {
-	unsigned n = va_arg(args, unsigned int);
+	unsigned int n = va_arg(args, unsigned int);
 
 	return (printb(n));
 }
