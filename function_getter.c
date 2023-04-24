@@ -18,7 +18,7 @@ int (*spec_func(char fmt))(va_list)
 		{'u', print_unsigned},
 		{'x', print_hex},
 		{'X', print_HEX},
-		{‘S’, print_S}
+		{'S', print_S}
 	};
 	for (i = 0; i < 11; i++)
 		if (fmt == spec_func[i].fmt)

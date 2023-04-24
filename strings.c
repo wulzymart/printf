@@ -51,10 +51,10 @@ int printS(char *s)
 	{
 		if (*s < 32 || *s > 126)
 		{
-			c += _putchar(‘\\’);
-			c += _putchar(‘x’);
+			c += _putchar('\\');
+			c += _putchar('x');
 			if (*s < 16)
-				c += _putchar(‘0’);
+				c += _putchar('0');
 			c += printX(*s);
 		}
 		else
@@ -74,8 +74,8 @@ int print_S(va_list args)
 	char *s = va_arg(args, char *);
 
 	if (s == NULL)
-		s = “(null)“;
-	if (*s == ‘\0’)
+		s = "(null)";
+	if (*s == '\0')
 		return (-1);
 	return (printS(s));
 }
