@@ -11,15 +11,14 @@ int _putchar(char c)
 	static int i;
 	static char buff[1024];
 
-	if (i >= 1024 || c  < 0 || c == 127)
+	if (i >= 1024 || c  == -1)
 	{
 		write(1, buff, i);
 		i = 0;
 	}
-	else
+	if (i != -1)
 	{
 		buff[i] = c;
-		write(1, &buff[i], 1);
 		i++;
 	}
 	return (1);
