@@ -31,5 +31,5 @@ int print_hex(va_list args);
 int printX(unsigned int n);
 int print_S(va_list args);
 int print_ptr(va_list args);
-
+int prints(char *s);
 #endif

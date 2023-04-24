@@ -38,8 +38,13 @@ int print_ptr(va_list args)
 	unsigned long n = va_arg(args, unsigned long);
 	int count = 0;
 
+	if (!n)
+		count += prints("(nil)");
+	else
+	{
 	count += _putchar('0');
 	count += _putchar('x');
 	count += printptr(n);
+	}
 	return (count);
 }
