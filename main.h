@@ -24,4 +24,5 @@ int  print_pcent(va_list);
 int _printf(const char *format, ...);
 int print_int(va_list args);
 int print_bin(va_list args);
+int print_oct(va_list args);
 #endif
