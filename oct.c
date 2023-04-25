@@ -29,13 +29,19 @@ int printo(unsigned int n)
 
 /**
  * print_oct - prints unsigned int from va_list in octal
- *@args: va_list arguement
+ * @args: va_list arguement
+ * @flag: flag
  * Return: number of items printed
  */
 
-int print_oct(va_list args)
+int print_oct(va_list args, char flag)
 {
-	unsigned int n = va_arg(args, unsigned int);
+	unsigned int n = va_arg(args, unsigned int), count = 0;
 
-	return (printo(n));
+	if (flag && flag != '#')
+		return (-1);
+	if (n > 0 && flag)
+		count += _putchar('0');
+	count += printo(n);
+	return (count);
 }
