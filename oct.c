@@ -38,9 +38,7 @@ int print_oct(va_list args, char flag)
 {
 	unsigned int n = va_arg(args, unsigned int), count = 0;
 
-	if (flag && flag != '#')
-		return (-1);
-	if (n > 0 && flag)
+	if (n > 0 && flag == '#')
 		count += _putchar('0');
 	count += printo(n);
 	return (count);

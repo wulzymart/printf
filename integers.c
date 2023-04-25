@@ -37,8 +37,6 @@ int print_int(va_list args, char flag)
 	int n;
 	unsigned int count = 0;
 
-	if (flag != 0 && !(flag == ' ' || flag == '+'))
-		return (-1);
 	n = va_arg(args, int);
 	if (n < 0)
 	{
@@ -65,5 +63,6 @@ int print_unsigned(va_list args, char flag)
 {
 	unsigned int n = va_arg(args, unsigned int);
 
-	return (flag ? -1 : print_num(n));
+	(void)flag;
+	return (print_num(n));
 }

@@ -10,5 +10,6 @@ int print_char(va_list args, char flag)
 {
 	char c = va_arg(args, int);
 
-	return (flag ? -1 : _putchar(c));
+	(void)flag;
+	return (_putchar(c));
 }

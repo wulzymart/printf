@@ -39,14 +39,17 @@ int print_ptr(va_list args, char flag)
 	unsigned long n = va_arg(args, unsigned long);
 	int count = 0;
 
-	(void)flag;
 	if (!n)
 		count += prints("(nil)");
 	else
 	{
-	count += _putchar('0');
-	count += _putchar('x');
-	count += printptr(n);
+		if (flag == ' ')
+			count += _putchar(' ');
+		if (flag == '+')
+			count += _putchar('+');
+		count += _putchar('0');
+		count += _putchar('x');
+		count += printptr(n);
 	}
 	return (count);
 }
