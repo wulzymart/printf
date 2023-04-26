@@ -34,7 +34,7 @@ int print_string(va_list args, flags flags)
 	if (s == NULL)
 		s = "(null)";
 	if (*s == '\0')
-		return (-1);
+		return (0);
 	return (prints(s));
 }
 
@@ -81,7 +81,7 @@ int print_S(va_list args, flags flags)
 	if (s == NULL)
 		s = "(null)";
 	if (*s == '\0')
-		return (-1);
+		return (0);
 	return (printS(s));
 }
 

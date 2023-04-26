@@ -110,8 +110,6 @@ int _printf(const char *format, ...)
 			{
 				f = spec_func(format[i]);
 				value = f(args, flg);
-				if (value < -1)
-					return (-1);
 				count += value;
 			}
 		}
