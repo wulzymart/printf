@@ -1,3 +1,4 @@
+
 #include "main.h"
 
 /**
@@ -82,4 +83,27 @@ int print_S(va_list args, flags flags)
 	if (*s == '\0')
 		return (-1);
 	return (printS(s));
+}
+
+/**
+ * print_unknown - prints unknown specifier
+ * @flg: flags
+ * @c: specifier
+ * Return: number of charters printed
+ */
+
+int print_unknown(flags flg, char c)
+{
+	int count = 0;
+
+	count += _putchar('%');
+	if (flg.hash)
+		count += _putchar('#');
+	if (flg.plus)
+		count += _putchar('+');
+	if (flg.space && !flg.plus)
+		count += _putchar(' ');
+	count += _putchar(c);
+
+	return (count);
 }

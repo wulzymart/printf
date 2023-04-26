@@ -1,5 +1,4 @@
 #include "main.h"
-static flags flg = {0, 0, 0};
 static unsigned int i, count;
 static int value, checker, (*f)(va_list, flags);
 /**
@@ -44,10 +43,11 @@ int isspec(char c)
  * the value of flag;
  * @fmt: string
  * @i: address of string index
+:* @flg: flag pointer
  * Return: 1 flag found and specifier is good , returns 0 if neither
  * -1 if flag and nextchar is null or not specifier
  */
-int getflag(const char *fmt, unsigned int *i)
+int getflag(const char *fmt, unsigned int *i, flags *flg)
 {
 	int d = *i;
 
@@ -56,25 +56,22 @@ int getflag(const char *fmt, unsigned int *i)
 		switch (fmt[d])
 		{
 		case '+':
-			flg.plus = 1;
+			flg->plus = 1;
 			break;
 		case ' ':
-			flg.space = 1;
+			flg->space = 1;
 			break;
 		case '#':
-			flg.hash = 1;
+			flg->hash = 1;
 			break;
 		}
 	}
+	*i = d;
 	if (!isspec(fmt[d]) && fmt[d])
 		return (0);
 	if (isspec(fmt[d]))
-	{
-		*i = d;
 		return (1);
-	}
-	else
-		return (-1);
+	return (-1);
 }
 /**
  * _printf - prints a formated text with arguements passed
@@ -85,6 +82,7 @@ int getflag(const char *fmt, unsigned int *i)
 int _printf(const char *format, ...)
 {
 	va_list args;
+	flags flg = {0, 0, 0};
 
 	if (format == NULL)
 		return (-1);
@@ -103,12 +101,9 @@ int _printf(const char *format, ...)
 				count += _putchar('%');
 				continue;
 			}
-			checker = getflag(format, &i);
+			checker = getflag(format, &i, &flg);
 			if (checker == 0)
-			{
-				_putchar('%');
-				_putchar(format[i]);
-			}
+				count += print_unknown(flg, format[i]);
 			if (checker == -1)
 				return (-1);
 			if (checker == 1)

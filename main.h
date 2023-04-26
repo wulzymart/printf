@@ -43,4 +43,6 @@ int printX(unsigned int n);
 int print_S(va_list args, flags flags);
 int print_ptr(va_list args, flags flags);
 int prints(char *s);
+int print_unknown(flags, char);
+
 #endif
