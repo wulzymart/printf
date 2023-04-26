@@ -31,14 +31,16 @@ int printptr(unsigned long n)
  * print_ptr - prints pointer from valist to screen
  * @args: va_list args
  * @flags: flag
+ * @mod: modifier
  * Return: number of elements printed
  */
 
-int print_ptr(va_list args, flags flags)
+int print_ptr(va_list args, flags flags, char mod)
 {
 	unsigned long n = va_arg(args, unsigned long);
 	int count = 0;
 
+	(void)mod;
 	if (!n)
 		count += prints("(nil)");
 	else

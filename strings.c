@@ -1,4 +1,3 @@
-
 #include "main.h"
 
 /**
@@ -23,14 +22,16 @@ int prints(char *s)
  * print_string - print a string from args list
  * @args: valist arguement to print from
  * @flags: flag
+ * @mod: modifier
  * Return: number of characters printed
  */
 
-int print_string(va_list args, flags flags)
+int print_string(va_list args, flags flags, char mod)
 {
 	char *s = va_arg(args, char *);
 
 	(void)flags;
+	(void)mod;
 	if (s == NULL)
 		s = "(null)";
 	if (*s == '\0')
@@ -71,13 +72,15 @@ int printS(char *s)
  * print_S - print a string from args list
  * @args: valist arguement to print from
  * @flags: flag
+ * @mod: modifier
  * Return: number of characters printed
  */
-int print_S(va_list args, flags flags)
+int print_S(va_list args, flags flags, char mod)
 {
 	char *s = va_arg(args, char *);
 
 	(void)flags;
+	(void)mod;
 	if (s == NULL)
 		s = "(null)";
 	if (*s == '\0')

@@ -31,13 +31,15 @@ int printb(unsigned int n)
  * print_bin - prints undigned int from va_list in binary
  * @args: va_list arguement
  * @flags: flags
+ * @mod: modifier
  * Return: number of items printed
  */
 
-int print_bin(va_list args, flags flags)
+int print_bin(va_list args, flags flags, char mod)
 {
 	unsigned int n = va_arg(args, unsigned int);
 
 	(void)flags;
+	(void)mod;
 	return (printb(n));
 }

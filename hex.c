@@ -33,19 +33,46 @@ int printx(unsigned int n)
  * print_hex - prints undigned int from va_list in lowercase hex
  * @args: va_list arguement
  * @flags: flag
+ * @mod: modifier
  * Return: number of items printed
  */
 
-int print_hex(va_list args, flags flags)
+int print_hex(va_list args, flags flags, char mod)
 {
-	unsigned int n = va_arg(args, unsigned int), count = 0;
+	unsigned int n, count = 0;
+	unsigned short  m;
+	unsigned long o;
 
-	if (n > 0 && flags.hash)
+	if (!mod)
 	{
-		count += _putchar('0');
-		count += _putchar('x');
+		n = va_arg(args, unsigned int);
+		if (n > 0 && flags.hash)
+		{
+			count += _putchar('0');
+			count += _putchar('x');
+		}
+		count += printx(n);
 	}
-	count += printx(n);
+	if (mod == 'l')
+	{
+		o = va_arg(args, long int);
+		if (o > 0 && flags.hash)
+		{
+			count += _putchar('0');
+			count += _putchar('x');
+		}
+		count += printlx(o);
+	}
+	if (mod == 'h')
+	{
+		m = va_arg(args, int);
+		if (m > 0 && flags.hash)
+		{
+			count += _putchar('0');
+			count += _putchar('x');
+		}
+		count += printsx((short)m);
+	}
 	return (count);
 }
 
@@ -82,19 +109,45 @@ int printX(unsigned int n)
  * print_HEX - prints undigned int from va_list in uppercase hex
  * @args: va_list arguement
  * @flags: flag
+ * @mod: modifier
  * Return: number of items printed
  */
 
-int print_HEX(va_list args, flags flags)
+int print_HEX(va_list args, flags flags, char mod)
 {
+	unsigned int n, count = 0;
+	unsigned short  m;
+	unsigned long o;
 
-	unsigned int n = va_arg(args, unsigned int), count = 0;
-
-	if (n > 0 && flags.hash)
+	if (!mod)
 	{
-		count += _putchar('0');
-		count += _putchar('X');
+		n = va_arg(args, unsigned int);
+		if (n > 0 && flags.hash)
+		{
+			count += _putchar('0');
+			count += _putchar('X');
+		}
+		count += printX(n);
 	}
-	count += printX(n);
+	if (mod == 'l')
+	{
+		o = va_arg(args, long int);
+		if (o > 0 && flags.hash)
+		{
+			count += _putchar('0');
+			count += _putchar('X');
+		}
+		count += printlX(o);
+	}
+	if (mod == 'h')
+	{
+		m = va_arg(args, int);
+		if (m > 0 && flags.hash)
+		{
+			count += _putchar('0');
+			count += _putchar('X');
+		}
+		count += printsX((short)m);
+	}
 	return (count);
 }
