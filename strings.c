@@ -97,13 +97,15 @@ int print_unknown(flags flg, char c)
 	int count = 0;
 
 	count += _putchar('%');
-	if (flg.hash)
-		count += _putchar('#');
-	if (flg.plus)
-		count += _putchar('+');
-	if (flg.space && !flg.plus)
-		count += _putchar(' ');
-	count += _putchar(c);
-
+	if (c != '%')
+	{
+		if (flg.hash)
+			count += _putchar('#');
+		if (flg.plus)
+			count += _putchar('+');
+		if (flg.space && !flg.plus)
+			count += _putchar(' ');
+		count += _putchar(c);
+	}
 	return (count);
 }
