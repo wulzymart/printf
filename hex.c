@@ -32,15 +32,15 @@ int printx(unsigned int n)
 /**
  * print_hex - prints undigned int from va_list in lowercase hex
  * @args: va_list arguement
- * @flag: flag
+ * @flags: flag
  * Return: number of items printed
  */
 
-int print_hex(va_list args, char flag)
+int print_hex(va_list args, flags flags)
 {
 	unsigned int n = va_arg(args, unsigned int), count = 0;
 
-	if (n > 0 && flag == '#')
+	if (n > 0 && flags.hash)
 	{
 		count += _putchar('0');
 		count += _putchar('x');
@@ -81,16 +81,16 @@ int printX(unsigned int n)
 /**
  * print_HEX - prints undigned int from va_list in uppercase hex
  * @args: va_list arguement
- * @flag: flag
+ * @flags: flag
  * Return: number of items printed
  */
 
-int print_HEX(va_list args, char flag)
+int print_HEX(va_list args, flags flags)
 {
 
 	unsigned int n = va_arg(args, unsigned int), count = 0;
 
-	if (n > 0 && flag == '#')
+	if (n > 0 && flags.hash)
 	{
 		count += _putchar('0');
 		count += _putchar('X');

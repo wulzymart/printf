@@ -30,14 +30,14 @@ int printb(unsigned int n)
 /**
  * print_bin - prints undigned int from va_list in binary
  * @args: va_list arguement
- * @flag: flag
+ * @flags: flags
  * Return: number of items printed
  */
 
-int print_bin(va_list args, char flag)
+int print_bin(va_list args, flags flags)
 {
 	unsigned int n = va_arg(args, unsigned int);
 
-	(void)flag;
+	(void)flags;
 	return (printb(n));
 }

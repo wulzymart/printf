@@ -28,11 +28,11 @@ int print_num(unsigned int n)
 /**
  * print_int - prints a signed int
  * @args: va_list arguement pointer
- * @flag: flag
+ * @flags: flag
  * Return: number of printed digits
  */
 
-int print_int(va_list args, char flag)
+int print_int(va_list args, flags flags)
 {
 	int n;
 	unsigned int count = 0;
@@ -45,9 +45,9 @@ int print_int(va_list args, char flag)
 	}
 	else
 	{
-		if (flag == '+')
+		if (flags.plus)
 			count += _putchar('+');
-		if (flag == ' ')
+		if (flags.space && !flags.plus)
 			count += _putchar(' ');
 	}
 	count += print_num(n);
@@ -56,13 +56,13 @@ int print_int(va_list args, char flag)
 /**
  * print_unsigned - prints a signed int
  * @args: va_list arguement pointer
- * @flag: flag
+ * @flags: flag
  * Return: number of printed digits
  */
-int print_unsigned(va_list args, char flag)
+int print_unsigned(va_list args, flags flags)
 {
 	unsigned int n = va_arg(args, unsigned int);
 
-	(void)flag;
+	(void)flags;
 	return (print_num(n));
 }

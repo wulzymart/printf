@@ -21,15 +21,15 @@ int prints(char *s)
 /**
  * print_string - print a string from args list
  * @args: valist arguement to print from
- * @flag: flag
+ * @flags: flag
  * Return: number of characters printed
  */
 
-int print_string(va_list args, char flag)
+int print_string(va_list args, flags flags)
 {
 	char *s = va_arg(args, char *);
 
-	(void)flag;
+	(void)flags;
 	if (s == NULL)
 		s = "(null)";
 	if (*s == '\0')
@@ -69,14 +69,14 @@ int printS(char *s)
 /**
  * print_S - print a string from args list
  * @args: valist arguement to print from
- * @flag: flag
+ * @flags: flag
  * Return: number of characters printed
  */
-int print_S(va_list args, char flag)
+int print_S(va_list args, flags flags)
 {
 	char *s = va_arg(args, char *);
 
-	(void)flag;
+	(void)flags;
 	if (s == NULL)
 		s = "(null)";
 	if (*s == '\0')

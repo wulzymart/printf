@@ -30,15 +30,15 @@ int printo(unsigned int n)
 /**
  * print_oct - prints unsigned int from va_list in octal
  * @args: va_list arguement
- * @flag: flag
+ * @flags: flag
  * Return: number of items printed
  */
 
-int print_oct(va_list args, char flag)
+int print_oct(va_list args, flags flags)
 {
 	unsigned int n = va_arg(args, unsigned int), count = 0;
 
-	if (n > 0 && flag == '#')
+	if (n > 0 && flags.hash)
 		count += _putchar('0');
 	count += printo(n);
 	return (count);

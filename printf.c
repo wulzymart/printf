@@ -1,7 +1,44 @@
 #include "main.h"
-static char flag;
+static flags flg = {0, 0, 0};
 static unsigned int i, count;
-static int value, checker, (*f)(va_list, char);
+static int value, checker, (*f)(va_list, flags);
+/**
+ * isflag - checks if a character is a flag
+ * @c: char to check
+ * Return: 1 if is flag 0 if not
+ */
+
+int isflag(char c)
+{
+	int j;
+	char f[] = "+ #";
+
+	for (j = 0; f[j]; j++)
+	{
+		if (c == f[j])
+			return (1);
+	}
+	return (0);
+}
+/**
+ * isspec - checks if a character is a specifier
+ * @c: char to check
+ * Return: 1 if is flag 0 if not
+ */
+
+int isspec(char c)
+{
+	int j;
+	char s[] = "diucsSpoxX";
+
+	for (j = 0; s[j]; j++)
+	{
+		if (c == s[j])
+			return (1);
+	}
+	return (0);
+}
+
 /**
  * getflag - checks if character is a flag or specifier and sets
  * the value of flag;
@@ -12,37 +49,32 @@ static int value, checker, (*f)(va_list, char);
  */
 int getflag(const char *fmt, unsigned int *i)
 {
-	char f[] = "+ #", s[] = "diucsSpoxX";
-	int j, k, d = *i;
+	int d = *i;
 
-	for (j = 0; s[j]; j++)
+	for (; isflag(fmt[d]); d++)
 	{
-		if (s[j] == fmt[d])
+		switch (fmt[d])
 		{
-			flag = 0;
-			return (1);
+		case '+':
+			flg.plus = 1;
+			break;
+		case ' ':
+			flg.space = 1;
+			break;
+		case '#':
+			flg.hash = 1;
+			break;
 		}
 	}
-	for (j = 0; f[j]; j++)
+	if (!isspec(fmt[d]) && fmt[d])
+		return (0);
+	if (isspec(fmt[d]))
 	{
-		if (f[j] == fmt[d])
-		{
-			d++;
-			if (fmt[d] == 0)
-				return (-1);
-			for (k = 0; s[k]; k++)
-			{
-				if (s[k] == fmt[d])
-				{
-					flag = f[j];
-					*i = d;
-					return (1);
-				}
-			}
-			return (-1);
-		}
+		*i = d;
+		return (1);
 	}
-	return (0);
+	else
+		return (-1);
 }
 /**
  * _printf - prints a formated text with arguements passed
@@ -82,7 +114,7 @@ int _printf(const char *format, ...)
 			if (checker == 1)
 			{
 				f = spec_func(format[i]);
-				value = f(args, flag);
+				value = f(args, flg);
 				if (value < -1)
 					return (-1);
 				count += value;
