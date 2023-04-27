@@ -1,31 +1,16 @@
 #include "main.h"
-
 /**
  * printx - function that prints lowercase hex value
  * @n: unsigned int to convert
  * Return: returns the amount of elements printed
  */
-int printx(unsigned int n)
+int printx(unsigned long n)
 {
 	unsigned int count = 0;
-	char hex[16] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a',
-			'b', 'c', 'd', 'e', 'f'};
+	char *s = num2str(n, 16);
 
-	if (n < 16)
-	{
-		count += _putchar(hex[n]);
-	}
-	else
-	if (n / 16 < 16)
-	{
-		count += _putchar(hex[n / 16]);
-		count += _putchar(hex[n % 16]);
-	}
-	else
-	{
-		count += printx(n / 16);
-		count += _putchar(hex[n % 16]);
-	}
+	count += prints(s);
+	free(s);
 	return (count);
 }
 
@@ -48,8 +33,7 @@ int print_hex(va_list args, flags flags, char mod)
 		n = va_arg(args, unsigned int);
 		if (n > 0 && flags.hash)
 		{
-			count += _putchar('0');
-			count += _putchar('x');
+			count += print0x();
 		}
 		count += printx(n);
 	}
@@ -58,20 +42,18 @@ int print_hex(va_list args, flags flags, char mod)
 		o = va_arg(args, long int);
 		if (o > 0 && flags.hash)
 		{
-			count += _putchar('0');
-			count += _putchar('x');
+			count += print0x();
 		}
-		count += printlx(o);
+		count += printx(o);
 	}
 	if (mod == 'h')
 	{
 		m = va_arg(args, int);
 		if (m > 0 && flags.hash)
 		{
-			count += _putchar('0');
-			count += _putchar('x');
+			count += print0x();
 		}
-		count += printsx((short)m);
+		count += printx((short)m);
 	}
 	return (count);
 }
@@ -81,27 +63,13 @@ int print_hex(va_list args, flags flags, char mod)
  * @n: unsigned int to convert
  * Return: returns the amount of elements printed
  */
-int printX(unsigned int n)
+int printX(unsigned long n)
 {
 	unsigned int count = 0;
-	char hex[16] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A',
-			'B', 'C', 'D', 'E', 'F'};
+	char *s = num2STR(n, 16);
 
-	if (n < 16)
-	{
-		count += _putchar(hex[n]);
-	}
-	else
-	if (n / 16 < 16)
-	{
-		count += _putchar(hex[n / 16]);
-		count += _putchar(hex[n % 16]);
-	}
-	else
-	{
-		count += printX(n / 16);
-		count += _putchar(hex[n % 16]);
-	}
+	count += prints(s);
+	free(s);
 	return (count);
 }
 
@@ -124,8 +92,7 @@ int print_HEX(va_list args, flags flags, char mod)
 		n = va_arg(args, unsigned int);
 		if (n > 0 && flags.hash)
 		{
-			count += _putchar('0');
-			count += _putchar('X');
+			count += print0X();
 		}
 		count += printX(n);
 	}
@@ -134,20 +101,18 @@ int print_HEX(va_list args, flags flags, char mod)
 		o = va_arg(args, long int);
 		if (o > 0 && flags.hash)
 		{
-			count += _putchar('0');
-			count += _putchar('X');
+			count += print0X();
 		}
-		count += printlX(o);
+		count += printX(o);
 	}
 	if (mod == 'h')
 	{
 		m = va_arg(args, int);
 		if (m > 0 && flags.hash)
 		{
-			count += _putchar('0');
-			count += _putchar('X');
+			count += print0X();
 		}
-		count += printsX((short)m);
+		count += printX((short)m);
 	}
 	return (count);
 }

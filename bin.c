@@ -5,25 +5,13 @@
  * @n: unsigned int to convert
  * Return: returns the amount of elements printed
  */
-int printb(unsigned int n)
+int printb(unsigned long n)
 {
 	unsigned int count = 0;
+	char *s = num2str(n, 2);
 
-	if (n < 2)
-	{
-		count += _putchar(n + 48);
-	}
-	else
-	if (n / 2 < 2)
-	{
-		count += _putchar(n / 2 + 48);
-		count += _putchar(n % 2 + 48);
-	}
-	else
-	{
-		count += printb(n / 2);
-		count += _putchar(n % 2 + 48);
-	}
+	count += prints(s);
+	free(s);
 	return (count);
 }
 

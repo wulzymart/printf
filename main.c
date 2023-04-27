@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <limits.h>
 #include "main.h"
 
 /**
@@ -11,8 +12,8 @@ int main(void)
 {
 	int len, len2;
 
-	len = _printf("There is %ld bytes in %ld KB\n", 1024L, 1L);
-	len2 = printf("There is %ld bytes in %ld KB\n", 1024L, 1L);
+	len = _printf("%lx - %lx = %lx\n", ULONG_MAX, 2048UL, ULONG_MAX - 2048UL);
+	len2 = printf("%lx - %lx = %lx\n", ULONG_MAX, 2048UL, ULONG_MAX - 2048UL);
 	fflush(stdout);
 	if (len != len2)
 	{

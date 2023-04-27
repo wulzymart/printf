@@ -5,7 +5,7 @@
  * @flags: flags
  * Return: number of items printed
  */
-int print_snum(int n, flags flags)
+int print_snum(long n, flags flags)
 {
 	unsigned int count = 0;
 
@@ -16,55 +16,12 @@ int print_snum(int n, flags flags)
 	}
 	else
 	{
-		printflag(flags);
+		count += printflag(flags);
 	}
 	count += print_num(n);
 	return (count);
 }
-/**
- * print_ss - prints a signed shortnumber with flags
- * @n: number
- * @flags: flags
- * Return: number of digits printed
- */
-int print_ss(short int n, flags flags)
-{
-	unsigned int count = 0;
 
-	if (n < 0)
-	{
-		count += _putchar('-');
-		n = 0 - n;
-	}
-	else
-	{
-		printflag(flags);
-	}
-	count += print_short(n);
-	return (count);
-}
-/**
- * print_sl - prints a signed number with flags
- * @n: number
- * @flags: flags
- * Return: number of digits printed
- */
-int print_sl(long n, flags flags)
-{
-	unsigned int count = 0;
-
-	if (n < 0)
-	{
-		count += _putchar('-');
-		n = 0 - n;
-	}
-	else
-	{
-		printflag(flags);
-	}
-	count += print_long(n);
-	return (count);
-}
 /**
  * print_int - prints a signed int
  * @args: va_list arguement pointer
@@ -88,12 +45,12 @@ int print_int(va_list args, flags flags, char mod)
 	if (mod == 'l')
 	{
 		o = va_arg(args, long int);
-		count += print_sl(o, flags);
+		count += print_snum(o, flags);
 	}
 	if (mod == 'h')
 	{
 		m = va_arg(args, int);
-		count += print_ss((short)m, flags);
+		count += print_snum((short)m, flags);
 	}
 	return (count);
 }
@@ -120,12 +77,12 @@ int print_unsigned(va_list args, flags flags, char mod)
 	if (mod == 'l')
 	{
 		o = va_arg(args, long int);
-		count += print_long(o);
+		count += print_num(o);
 	}
 	if (mod == 'h')
 	{
 		m = va_arg(args, int);
-		count += print_short((short)m);
+		count += print_num((short)m);
 	}
 	return (count);
 

@@ -28,6 +28,9 @@ typedef struct func_man
 	int (*f)(va_list, flags, char);
 } func_man;
 
+int ismod(char c);
+int isspec(char c);
+int isflag(char c);
 int _putchar(char c);
 int (*spec_func(char fmt))(va_list, flags, char);
 int print_char(va_list args, flags flags, char mod);

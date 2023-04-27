@@ -5,79 +5,16 @@
  * @n: unsigned int to convert
  * Return: returns the amount of elements printed
  */
-int printo(unsigned int n)
+int printo(unsigned long n)
 {
 	unsigned int count = 0;
+	char *s = num2str(n, 8);
 
-	if (n < 8)
-	{
-		count += _putchar(n + 48);
-	}
-	else
-	if (n / 8 < 8)
-	{
-		count += _putchar(n / 8 + 48);
-		count += _putchar(n % 8 + 48);
-	}
-	else
-	{
-		count += printo(n / 8);
-		count += _putchar(n % 8 + 48);
-	}
+	count += prints(s);
+	free(s);
 	return (count);
 }
-/**
- * printso - function that prints an octal value of shorts
- * @n: unsigned short to convert
- * Return: returns the amount of elements printed
- */
-int printso(unsigned short n)
-{
-	unsigned int count = 0;
 
-	if (n < 8)
-	{
-		count += _putchar(n + 48);
-	}
-	else
-	if (n / 8 < 8)
-	{
-		count += _putchar(n / 8 + 48);
-		count += _putchar(n % 8 + 48);
-	}
-	else
-	{
-		count += printso(n / 8);
-		count += _putchar(n % 8 + 48);
-	}
-	return (count);
-}
-/**
- * printlo - function that prints an octal value of a long
- * @n: unsigned long to convert
- * Return: returns the amount of elements printed
- */
-int printlo(unsigned long n)
-{
-	unsigned int count = 0;
-
-	if (n < 8)
-	{
-		count += _putchar(n + 48);
-	}
-	else
-	if (n / 8 < 8)
-	{
-		count += _putchar(n / 8 + 48);
-		count += _putchar(n % 8 + 48);
-	}
-	else
-	{
-		count += printlo(n / 8);
-		count += _putchar(n % 8 + 48);
-	}
-	return (count);
-}
 /**
  * print_oct - prints unsigned int from va_list in octal
  * @args: va_list arguement
@@ -104,14 +41,14 @@ int print_oct(va_list args, flags flags, char mod)
 		o = va_arg(args, long int);
 		if (o > 0 && flags.hash)
 			count += _putchar('0');
-		count += printlo(o);
+		count += printo(o);
 	}
 	if (mod == 'h')
 	{
 		m = va_arg(args, int);
 		if (m > 0 && flags.hash)
 			count += _putchar('0');
-		count += printso((short)m);
+		count += printo((short)m);
 	}
 	return (count);
 }
