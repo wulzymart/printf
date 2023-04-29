@@ -4,7 +4,7 @@
  * @fmt: specifier
  * Return: NULL if specifier not found or function pointer
  */
-int (*spec_func(char fmt))(va_list args, flags flags, char mod)
+int (*spec_func(char fmt))(va_list args, flags flags, char mod, int)
 {
 	int i;
 	func_man spec_func[11] = {

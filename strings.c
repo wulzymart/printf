@@ -1,32 +1,14 @@
 #include "main.h"
-
-/**
- * prints - prints any given string
- * @s: string to be printed
- * Return: number of charcters printed
- */
-
-int prints(char *s)
-{
-	unsigned int c = 0;
-
-	if (s != NULL)
-	while (*s)
-	{
-		c += _putchar(*s);
-		s++;
-	}
-	return (c);
-}
 /**
  * print_string - print a string from args list
  * @args: valist arguement to print from
  * @flags: flag
  * @mod: modifier
+ * @width: width
  * Return: number of characters printed
  */
 
-int print_string(va_list args, flags flags, char mod)
+int print_string(va_list args, flags flags, char mod, int width)
 {
 	char *s = va_arg(args, char *);
 
@@ -36,7 +18,7 @@ int print_string(va_list args, flags flags, char mod)
 		s = "(null)";
 	if (*s == '\0')
 		return (0);
-	return (prints(s));
+	return (printsw(s, width));
 }
 
 /**
@@ -53,7 +35,7 @@ int printS(char *s)
 	if (s != NULL)
 	while (*s)
 	{
-		if (*s < 32 || *s > 126)
+		/*if (*s < 32 || *s > 126)
 		{
 			c += _putchar('\\');
 			c += _putchar('x');
@@ -61,32 +43,13 @@ int printS(char *s)
 				c += _putchar('0');
 			c += printX(*s);
 		}
-		else
+		else*/
 		c += _putchar(*s);
 		s++;
 	}
 	return (c);
 }
 
-/**
- * print_S - print a string from args list
- * @args: valist arguement to print from
- * @flags: flag
- * @mod: modifier
- * Return: number of characters printed
- */
-int print_S(va_list args, flags flags, char mod)
-{
-	char *s = va_arg(args, char *);
-
-	(void)flags;
-	(void)mod;
-	if (s == NULL)
-		s = "(null)";
-	if (*s == '\0')
-		return (0);
-	return (printS(s));
-}
 
 /**
  * print_unknown - prints unknown specifier
@@ -100,15 +63,12 @@ int print_unknown(flags flg, char c)
 	int count = 0;
 
 	count += _putchar('%');
-	if (c != '%')
-	{
-		if (flg.hash)
-			count += _putchar('#');
-		if (flg.plus)
-			count += _putchar('+');
-		if (flg.space && !flg.plus)
-			count += _putchar(' ');
-		count += _putchar(c);
-	}
+	if (flg.hash)
+		count += _putchar('#');
+	if (flg.plus)
+		count += _putchar('+');
+	if (flg.space && !flg.plus)
+		count += _putchar(' ');
+	count += _putchar(c);
 	return (count);
 }

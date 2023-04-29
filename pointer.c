@@ -1,30 +1,54 @@
 #include "main.h"
 /**
- * printptr - prints addresses to screen
- * @n: address of pointer in integer value
- * Return: number of elements printed
+ * sprint_ptr - prints a pointer with flags to string
+ * @n: number
+ * @flags: flags
+ * Return: number in string
  */
-
-int printptr(unsigned long n)
+char *sprint_ptr(long n, flags flags)
 {
-	unsigned int count = 0;
-	char hex[16] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a',
-			'b', 'c', 'd', 'e', 'f'};
-	if (n < 16)
+	char *s, *num;
+	int l, m, o;
+
+	(void)flags;
+	s = num2str(n, 16);
+	if (!s)
+		return (NULL);
+	l = _strlen(s) + 2;
+	num = malloc(sizeof(char) * (l + 1));
+	if (!num)
 	{
-		count += _putchar(hex[n]);
+		free(s);
+		return (NULL);
 	}
-	else
-	if (n / 16 < 16)
+	num[l] = '\0';
+	m = 0;
+	num[m++] = '0';
+	num[m++] = 'x';
+	for (o = 0; m < l && s[o] ; o++)
 	{
-		count += _putchar(hex[n / 16]);
-		count += _putchar(hex[n % 16]);
+		num[m++] = s[o];
 	}
-	else
-	{
-		count += printptr(n / 16);
-		count += _putchar(hex[n % 16]);
-	}
+	free(s);
+	return (num);
+}
+/**
+ * printpw - prints pointer with specified width
+ * @n: number string
+ * @width: width
+ * Return: number of characters printed
+*/
+
+int printpw(char *n, int width)
+{
+	int l, count = 0, j;
+
+	l = _strlen(n);
+	if (l < width)
+		for (j = 0; j < (width - l); j++)
+			count += _putchar(' ');
+	count += prints(n);
+	free(n);
 	return (count);
 }
 /**
@@ -32,26 +56,21 @@ int printptr(unsigned long n)
  * @args: va_list args
  * @flags: flag
  * @mod: modifier
+ * @width: width
  * Return: number of elements printed
  */
 
-int print_ptr(va_list args, flags flags, char mod)
+int print_ptr(va_list args, flags flags, char mod, int width)
 {
 	unsigned long n = va_arg(args, unsigned long);
 	int count = 0;
+	char *s;
 
 	(void)mod;
 	if (!n)
-		count += prints("(nil)");
+		s = "(nil)";
 	else
-	{
-		if (flags.space && !flags.plus)
-			count += _putchar(' ');
-		if (flags.plus)
-			count += _putchar('+');
-		count += _putchar('0');
-		count += _putchar('x');
-		count += printptr(n);
-	}
+		s = sprint_ptr(n, flags);
+	count += printpw(s, width);
 	return (count);
 }

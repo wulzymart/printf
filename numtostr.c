@@ -40,7 +40,7 @@ char *num2str(unsigned long n, int b)
 	l += num_len(n, b);
 	str = malloc(sizeof(char) * (l + 1));
 	if (str == NULL)
-		exit(98);
+		return (NULL);
 	str[l] = '\0';
 	for (j = l - 1 ; j >= 0; j--)
 	{
@@ -68,7 +68,7 @@ char *num2STR(unsigned long n, int b)
 	l += num_len(n, b);
 	str = malloc(sizeof(char) * (l + 1));
 	if (str == NULL)
-		exit(98);
+		return (NULL);
 	str[l] = '\0';
 	for (j = l - 1 ; j >= 0; j--)
 	{

@@ -25,7 +25,7 @@ int isflag(char c)
 int isspec(char c)
 {
 	int j;
-	char s[] = "diucsSpoxX";
+	char s[] = "diubcsSpoxX";
 
 	for (j = 0; s[j]; j++)
 	{
@@ -50,11 +50,11 @@ int ismod(char c)
 	return (0);
 }
 /**
- * isdigit - checks if a character is a digit
+ * _isdigit - checks if a character is a digit
  * @c: character
  * Return: 1 if is digit and 0 if not
  */
-int isdigit(char c)
+int _isdigit(char c)
 {
-	return (c >= '0' && <= '9');
+	return (c >= '0' && c <= '9');
 }

@@ -1,25 +1,75 @@
 #include "main.h"
 /**
- * print0x - prints # flag for hex
- * Return: 2
+ * sprint_x - prints a unsigned int in hex with flags
+ * @n: number
+ * @flags: flags
+ * Return: number in string
  */
-int print0x(void)
+char *sprint_x(long n, flags flags)
 {
-	unsigned int count = 0;
+	char *s, *num;
+	int l, m, o = 0;
 
-	count += _putchar('0');
-	count += _putchar('x');
-	return (count);
+	s = num2str(n, 16);
+	if (!s)
+		return (NULL);
+	l = _strlen(s);
+	if (n && flags.hash)
+		l += 2;
+	num = malloc(sizeof(char) * (l + 1));
+	if (!num)
+	{
+		free(s);
+		return (NULL);
+	}
+	num[l] = '\0';
+	if (flags.hash)
+	{
+		num[0] = '0';
+		num[1] = 'x';
+		o = 1;
+	}
+	for (m = 0; m < l && s[m] ; m++)
+	{
+		num[o ? m + 2 : m] = s[m];
+	}
+	free(s);
+	return (num);
 }
 /**
- * print0X - prints # flag for hex in capital
- * Return: 2
+ * sprint_X- prints a signed number in hex with flags
+ * @n: number
+ * @flags: flags
+ * Return: number in string
  */
-int print0X(void)
+char *sprint_X(long n, flags flags)
 {
-	unsigned int count = 0;
+	char *s, *num;
+	int l, m, o = 0;
 
-	count += _putchar('0');
-	count += _putchar('X');
-	return (count);
+	s = num2STR(n, 16);
+	if (!s)
+		return (NULL);
+	l = _strlen(s);
+	if (n && flags.hash)
+		l += 2;
+	num = malloc(sizeof(char) * (l + 1));
+	if (!num)
+	{
+		free(s);
+		return (NULL);
+	}
+	num[l] = '\0';
+	if (flags.hash)
+	{
+		num[0] = '0';
+		num[1] = 'X';
+		o = 1;
+	}
+	for (m = 0; m < l && s[m]; m++)
+	{
+		num[o ? m + 2 : m] = s[m];
+	}
+	free(s);
+	return (num);
 }

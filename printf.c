@@ -1,74 +1,20 @@
 #include "main.h"
-static unsigned int i, count;
-static int value, checker, (*f)(va_list, flags, char);
+#include <stdio.h>
+static unsigned int count;
 static char mod;
 /**
- * isflag - checks if a character is a flag
- * @c: char to check
- * Return: 1 if is flag 0 if not
- */
-
-int isflag(char c)
-{
-	int j;
-	char f[] = "+ #";
-
-	for (j = 0; f[j]; j++)
-	{
-		if (c == f[j])
-			return (1);
-	}
-	return (0);
-}
-/**
- * isspec - checks if a character is a specifier
- * @c: char to check
- * Return: 1 if is flag 0 if not
- */
-
-int isspec(char c)
-{
-	int j;
-	char s[] = "diucsSpoxX";
-
-	for (j = 0; s[j]; j++)
-	{
-		if (c == s[j])
-			return (1);
-	}
-	return (0);
-}
-/**
- * ismod - checks if a character is a modifier
- * @c: charcter to check
- * Return: 0 if not, 1 if it is
- */
-int ismod(char c)
-{
-	char *mods = "lh";
-	int j;
-
-	for (j = 0; mods[j]; j++)
-		if (mods[j] == c)
-			return (1);
-	return (0);
-}
-
-/**
- * getparams - checks if character is a flag or specifier and sets
- * the value of flag;
- * @fmt: string
- * @i: address of string index
- * @flg: flag pointer
- * @mod: modifier
- * Return: 1 flag found and specifier is good , returns 0 if neither
- * -1 if flag and nextchar is null or not specifier
- */
-int getparams(const char *fmt, unsigned int *i, flags *flg, char *mod)
+ * getflags - sets flags of a spec in formated text
+ * @fmt: formated string
+ * @i: current index:
+ * @flg: flags struct
+*/
+void getflags(const char *fmt, int *i, flags *flg)
 {
 	int d = *i;
 
-	*mod = 0;
+flg->hash = 0;
+flg->plus = 0;
+flg->plus = 0;
 	for (; isflag(fmt[d]); d++)
 	{
 		switch (fmt[d])
@@ -84,16 +30,74 @@ int getparams(const char *fmt, unsigned int *i, flags *flg, char *mod)
 			break;
 		}
 	}
+	*i = d;
+}
+/**
+ * getwidth - sets flags of a spec in formated text
+ * @fmt: formated string
+ * @i: current index:
+ * @args: arguements
+ * Return: integer
+*/
+int getwidth(const char *fmt, int *i, va_list args)
+{
+	int d = *i, j = 0, n = 0;
+
+	if (fmt[d] == '*')
+	{
+		d++;
+		return (va_arg(args, int));
+	}
+	for (j = 0; _isdigit(fmt[d]); j++)
+	{
+		if (j == 0 && fmt[d] == '0')
+			return (0);
+		n = n * 10 + (fmt[d] - '0');
+		d++;
+	}
+	*i = d;
+	return (n);
+}
+/**
+ * getparams - checks if character is a flag or specifier and sets
+ * the value of flag;
+ * @fmt: string
+ * @i: address of string index
+ * @flg: flag pointer
+ * @mod: modifier
+ * @w: width
+ * @args: arguements
+ * Return: 1 flag found and specifier is good , returns 0 if neither
+ * -1 if flag and nextchar is null or not specifier
+ */
+int getparams(const char *fmt, int *i, flags *flg, char *mod, int *w,
+va_list args)
+{
+	int d = *i, j = *i;
+
+	*mod = 0;
+	getflags(fmt, &d, flg);
+	j = fmt[d] != '*' ? d : d + 1;
+	*w = getwidth(fmt, &d, args);
 	if (ismod(fmt[d]))
 	{
 		*mod = fmt[d];
 		d++;
 	}
+	
+	
 	*i = d;
-	if (!isspec(fmt[d]) && fmt[d])
-		return (0);
+
 	if (isspec(fmt[d]))
 		return (1);
+	if (!isspec(fmt[d]) && fmt[d])
+	{
+		if (fmt[d] == '%')
+			return (2);
+		*i = j;
+		return (0);
+	}
+	
 	return (-1);
 }
 /**
@@ -106,6 +110,7 @@ int _printf(const char *format, ...)
 {
 	va_list args;
 	flags flg = {0, 0, 0};
+	int i, value, checker, (*f)(va_list, flags, char, int), width = 0;
 
 	if (format == NULL)
 		return (-1);
@@ -119,7 +124,9 @@ int _printf(const char *format, ...)
 			i++;
 			if (format[i] == '\0')
 				return (-1);
-			checker = getparams(format, &i, &flg, &mod);
+			checker = getparams(format, &i, &flg, &mod, &width, args);
+			if (checker == 2)
+				count += _putchar('%');
 			if (checker == 0)
 				count += print_unknown(flg, format[i]);
 			if (checker == -1)
@@ -127,7 +134,7 @@ int _printf(const char *format, ...)
 			if (checker == 1)
 			{
 				f = spec_func(format[i]);
-				value = f(args, flg, mod);
+				value = f(args, flg, mod, width);
 				count += value;
 			}
 		}

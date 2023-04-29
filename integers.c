@@ -1,56 +1,39 @@
 #include "main.h"
-/**
- * print_snum - prints a signed number with flags
- * @n: number
- * @flags: flags
- * Return: number of items printed
- */
-int print_snum(long n, flags flags)
-{
-	unsigned int count = 0;
-
-	if (n < 0)
-	{
-		count += _putchar('-');
-		n = 0 - n;
-	}
-	else
-	{
-		count += printflag(flags);
-	}
-	count += print_num(n);
-	return (count);
-}
-
+#include <stdio.h>
 /**
  * print_int - prints a signed int
  * @args: va_list arguement pointer
  * @flags: flag
  * @mod: modifier
+ * @width: width
  * Return: number of printed digits
  */
 
-int print_int(va_list args, flags flags, char mod)
+int print_int(va_list args, flags flags, char mod, int width)
 {
 	int n;
-	short  m;
+	short m;
 	long o;
 	unsigned int count = 0;
+	char *s;
 
 	if (!mod)
 	{
 		n = va_arg(args, int);
-		count += print_snum(n, flags);
+		s = sprint_snum(n, flags);
+		count += printnw(s, width);
 	}
 	if (mod == 'l')
 	{
 		o = va_arg(args, long int);
-		count += print_snum(o, flags);
+		s =  sprint_snum(o, flags);
+		count += printnw(s, width);
 	}
 	if (mod == 'h')
 	{
 		m = va_arg(args, int);
-		count += print_snum((short)m, flags);
+		s = sprint_snum((short)m, flags);
+		count += printnw(s, width);
 	}
 	return (count);
 }
@@ -59,30 +42,35 @@ int print_int(va_list args, flags flags, char mod)
  * @args: va_list arguement pointer
  * @flags: flag
  * @mod: modifier
+ * @width: width
  * Return: number of printed digits
  */
-int print_unsigned(va_list args, flags flags, char mod)
+int print_unsigned(va_list args, flags flags, char mod, int width)
 {
 	unsigned int n;
 	unsigned short  m;
 	unsigned long o;
 	unsigned int count = 0;
+	char *s;
 
 	(void)flags;
 	if (!mod)
 	{
 		n = va_arg(args, int);
-		count += print_num(n);
+		s = sprint_num(n);
+		count += printnw(s, width);
 	}
 	if (mod == 'l')
 	{
 		o = va_arg(args, long int);
-		count += print_num(o);
+		s = sprint_num(o);
+		count += printnw(s, width);
 	}
 	if (mod == 'h')
 	{
 		m = va_arg(args, int);
-		count += print_num((short)m);
+		s = sprint_num((short)m);
+		count += printnw(s, width);
 	}
 	return (count);
 

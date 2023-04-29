@@ -1,16 +1,21 @@
 #include "main.h"
 /**
- * printx - function that prints lowercase hex value
- * @n: unsigned int to convert
- * Return: returns the amount of elements printed
- */
-int printx(unsigned long n)
-{
-	unsigned int count = 0;
-	char *s = num2str(n, 16);
+ * printxw - prints hex with specified width
+ * @n: number string
+ * @width: width
+ * Return: number of charters printed
+*/
 
-	count += prints(s);
-	free(s);
+int printxw(char *n, int width)
+{
+	int l, count = 0, j;
+
+	l = _strlen(n);
+	if (l < width)
+		for (j = 0; j < (width - l); j++)
+			count += _putchar(' ');
+	count += prints(n);
+	free(n);
 	return (count);
 }
 
@@ -19,57 +24,38 @@ int printx(unsigned long n)
  * @args: va_list arguement
  * @flags: flag
  * @mod: modifier
+ * @width: width
  * Return: number of items printed
  */
 
-int print_hex(va_list args, flags flags, char mod)
+int print_hex(va_list args, flags flags, char mod, int width)
 {
 	unsigned int n, count = 0;
 	unsigned short  m;
 	unsigned long o;
+	char *s;
 
 	if (!mod)
 	{
 		n = va_arg(args, unsigned int);
-		if (n > 0 && flags.hash)
-		{
-			count += print0x();
-		}
-		count += printx(n);
+
+		s = sprint_x(n, flags);
+		count += printxw(s, width);
 	}
 	if (mod == 'l')
 	{
 		o = va_arg(args, long int);
-		if (o > 0 && flags.hash)
-		{
-			count += print0x();
-		}
-		count += printx(o);
+		s = sprint_x(o, flags);
+
+		count += printxw(s, width);
 	}
 	if (mod == 'h')
 	{
 		m = va_arg(args, int);
-		if (m > 0 && flags.hash)
-		{
-			count += print0x();
-		}
-		count += printx((short)m);
+		s = sprint_x((short)m, flags);
+
+		count += printxw(s, width);
 	}
-	return (count);
-}
-
-/**
- * printX - function that prints a capital hex value
- * @n: unsigned int to convert
- * Return: returns the amount of elements printed
- */
-int printX(unsigned long n)
-{
-	unsigned int count = 0;
-	char *s = num2STR(n, 16);
-
-	count += prints(s);
-	free(s);
 	return (count);
 }
 
@@ -78,41 +64,36 @@ int printX(unsigned long n)
  * @args: va_list arguement
  * @flags: flag
  * @mod: modifier
+ * @width: width
  * Return: number of items printed
  */
 
-int print_HEX(va_list args, flags flags, char mod)
+int print_HEX(va_list args, flags flags, char mod, int width)
 {
 	unsigned int n, count = 0;
 	unsigned short  m;
 	unsigned long o;
+	char *s;
 
 	if (!mod)
 	{
 		n = va_arg(args, unsigned int);
-		if (n > 0 && flags.hash)
-		{
-			count += print0X();
-		}
-		count += printX(n);
+
+		s = sprint_X(n, flags);
+		count += printxw(s, width);
 	}
 	if (mod == 'l')
 	{
 		o = va_arg(args, long int);
-		if (o > 0 && flags.hash)
-		{
-			count += print0X();
-		}
-		count += printX(o);
+		s = sprint_X(o, flags);
+
+		count += printxw(s, width);
 	}
 	if (mod == 'h')
 	{
 		m = va_arg(args, int);
-		if (m > 0 && flags.hash)
-		{
-			count += print0X();
-		}
-		count += printX((short)m);
+		s = sprint_X((short)m, flags);
+		count += printxw(s, width);
 	}
 	return (count);
 }

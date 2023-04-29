@@ -20,14 +20,16 @@ int printb(unsigned long n)
  * @args: va_list arguement
  * @flags: flags
  * @mod: modifier
+ * @width: width
  * Return: number of items printed
  */
 
-int print_bin(va_list args, flags flags, char mod)
+int print_bin(va_list args, flags flags, char mod, int width)
 {
 	unsigned int n = va_arg(args, unsigned int);
 
 	(void)flags;
 	(void)mod;
+	(void)width;
 	return (printb(n));
 }
