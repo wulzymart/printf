@@ -11,9 +11,9 @@ int _putchar(char c)
 	static char buff[1024];
 	static int j;
 
-	if (c == -1 || j >= 1024)
+	if (c <= 0 || j >= 1024)
 	{
-		write(1, &buff, j);
+		write(1, buff, j);
 		j = 0;
 	}
 	else
