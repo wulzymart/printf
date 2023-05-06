@@ -8,10 +8,20 @@
 
 int _putchar(char c)
 {
-	char buff[1024];
+	static char buff[1024];
+	static int j;
 
-	buff[0] = c;
-	return (write(1, buff, 1));
+	if (c < 0 || j >= 1024)
+	{
+		write(1, buff, j);
+		j = 0;
+	}
+	else
+	{
+		buff[j] = c;
+		j++;
+	}
+	return (1);
 }
 /**
  * _strlen - gets length of string

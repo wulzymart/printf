@@ -35,15 +35,6 @@ int printS(char *s)
 	if (s != NULL)
 	while (*s)
 	{
-		/*if (*s < 32 || *s > 126)
-		{
-			c += _putchar('\\');
-			c += _putchar('x');
-			if (*s < 16)
-				c += _putchar('0');
-			c += printX(*s);
-		}
-		else*/
 		c += _putchar(*s);
 		s++;
 	}

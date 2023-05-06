@@ -84,8 +84,6 @@ va_list args)
 		*mod = fmt[d];
 		d++;
 	}
-	
-	
 	*i = d;
 
 	if (isspec(fmt[d]))
@@ -97,7 +95,6 @@ va_list args)
 		*i = j;
 		return (0);
 	}
-	
 	return (-1);
 }
 /**
@@ -139,6 +136,7 @@ int _printf(const char *format, ...)
 			}
 		}
 	}
+	_putchar(-2);
 	va_end(args);
 	return (count);
 }

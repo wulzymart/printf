@@ -44,15 +44,15 @@ char *Stostr(char *s)
 				char c = s[m] % 16;
 
 				str[n++] = '0';
-				str[n++] = c < 10 ? c + '0' : (c - 10) + 'A' ;
+				str[n++] = c < 10 ? c + '0' : (c - 10) + 'A';
 			}
 			else
 			{
 				char c = s[m] / 16;
 				char d = s[m] % 16;
 
-				str[n++] = c < 10 ? c + '0' : (c - 10) + 'A' ;
-				str[n++] = d < 10 ? d + '0' : (d - 10) + 'A' ;
+				str[n++] = c < 10 ? c + '0' : (c - 10) + 'A';
+				str[n++] = d < 10 ? d + '0' : (d - 10) + 'A';
 			}
 		}
 		else
@@ -83,7 +83,7 @@ int print_S(va_list args, flags flags, char mod, int width)
 		return (0);
 	str = Stostr(s);
 	if (!str)
-		return -1; 
+		return (-1);
 	count += prints(str);
 	free(str);
 	return (count);
