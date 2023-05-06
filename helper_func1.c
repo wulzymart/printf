@@ -13,7 +13,7 @@ int _putchar(char c)
 
 	if (c == -1 || j >= 1024)
 	{
-		write(1, buff, j);
+		write(1, &buff, j);
 		j = 0;
 	}
 	else
